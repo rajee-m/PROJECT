@@ -46,6 +46,7 @@ export class UserdetailsComponent implements OnInit {
     if(confirm("Are you sure want to delete?"))
     {
       console.log("selected id" + id);
+      this.OnUserDeleted.emit(id);
     }
   }
 }

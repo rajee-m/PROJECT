@@ -1,5 +1,9 @@
+ import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { userDetail } from '../userDetails';
+import { ActivatedRoute } from '@angular/router';
+import { v4 as uuidv4   } from 'uuid';
+
 
 @Component({
   selector: 'app-registration',
@@ -10,6 +14,8 @@ export class RegistrationComponent implements OnInit {
   title = 'PROJECT';
   @ViewChild('userForm') userForm: NgForm;
   @ViewChild('moreBtn') moreButton;
+  
+
 
   firstName:string = "";
   lastName:string = "";
@@ -22,8 +28,9 @@ export class RegistrationComponent implements OnInit {
   userData = new userDetail("", "", 0, "", "", "", false,0);
   genderHasError = true;
   moreClick:boolean = false;
+  userid:number = 0 ;
+  editMode = false;
 
-  ngOnInit(): void {
   ngOnInit(): void 
   {
     /*this.userid = this.route.snapshot.params['id'];
@@ -61,7 +68,31 @@ export class RegistrationComponent implements OnInit {
   onMoreClick()
   {
     this.moreClick = !this.moreClick;
-    this.moreButton.value.dis
+  }
+
+  EditUser(id: number)
+  {
+   
+
+    if(this.allusers != null)
+    {
+      let users = this.allusers.slice();
+      this.userid = id;
+      this.userData =  users.find(item => item.id == id);
+      console.log('selected user ' +this.userData);    
+      this.editMode = true;    
+      
+    }
+  }
+
+  DeleteUser(id: number)
+  {
+    if(this.allusers != null)
+    {
+      let index = this.allusers.findIndex( item => item.id ==  id);
+      console.log('entered delete' + id);
+      this.allusers.splice(index, 1);
+    }
   }
 
   onSubmit()
@@ -102,6 +133,7 @@ export class RegistrationComponent implements OnInit {
   clearData()
   {
     this.userForm.reset();
+    this.editMode = false;
    }  
 
 }
