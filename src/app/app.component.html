@@ -1,0 +1,139 @@
+
+<nav>
+  <a routerLink="/registration">User Registration</a>
+  <a routerLink="/userdetails">Registered Users</a>
+</nav>
+<br>
+<br>
+<router-outlet></router-outlet>
+
+<!--<div class="container">
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+   <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <div class="form-group">
+        <label>First Name</label>
+    
+        <div class="col"><input type="text" required #fname="ngModel" 
+          [class.is-invalid]="fname.invalid && fname.touched"
+          name="firstname" [(ngModel)]="userData.firstname"
+          class="form-control"></div>
+          <small class="text-danger" 
+          [class.d-none]="fname.valid || fname.untouched">First Name is required</small>
+      </div>
+      
+      <div class="form-group">
+        <label>Last Name</label>
+        <div class="col"><input type="text"required #lname="ngModel"
+          [class.is-invalid]="lname.invalid && lname.touched"
+           [(ngModel)]="userData.lastname"
+           name="lastname" class="form-control">
+          </div>
+          <small class="text-danger" 
+          [class.d-none]="lname.valid || lname.untouched">Last Name is required</small>
+    
+      </div>
+      <div class="form-group">
+        <label>      Gender
+        </label>
+        <div class="col">
+          <select [(ngModel)]="userData.gender" name="gender" 
+           #gender="ngModel" (blue)="validateGender(gender.value)" (change)="validateGender(gender.value)"
+           class="custom-select" [class.is-invalid]="genderHasError && gender.touched">
+            <option [ngValue]="null">Please select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <small class="text-danger" 
+        [class.d-none]="!genderHasError || gender.untouched">Please select gender</small>
+    
+      </div>
+      <div class="form-group">
+        <label>Age</label>
+        <div class="col">
+          <input type="number" min="1" max="200" 
+          [(ngModel)]="userData.age"  #age="ngModel" required
+          name="age" class="form-control" class.is-valid = "age.invalid && age.touched"></div>
+          <small class="text-danger" 
+          [class.d-none]="age.valid || age.untouched">Please select age</small>
+    
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <div class="col"><input type="text" #city="ngModel" required
+           class.is-valid="city.invalid && city.touched"
+           [(ngModel)]="userData.city" 
+           name="city" class="form-control"></div>
+           <small class="text-danger" 
+           [class.d-none]="city.valid || city.untouched">City is required</small>
+      </div>
+      <div class="form-group">
+        <label>
+    Country
+        </label>
+        <div class="col"><select [(ngModel)]="userData.country" required
+          #country="ngModel" class.is-valid="country.invalid && country.touched"
+          name="country">
+          <option value="india">India</option>
+          <option value="usa">USA</option>
+        <option value="canada">Canada</option></select></div>
+        <small class="text-danger" 
+        [class.d-none]="country.valid || country.untouched">Country is required</small>
+    
+      </div>
+      <div class="form-group">
+        <div class="col">
+          <input type="checkbox" [(ngModel)]="userData.agree" name="agree" #agree="ngModel"
+          required class.is-valid="agree.invalid && agree.touched"> 
+          <span>I agree to process my data</span></div>
+          <small class="text-danger" 
+          [class.d-none]="agree.valid || agree.untouched">Plese select agree to process your data</small>
+    
+      </div>
+      <div class="form-group">
+        <div class="col">
+          <button class="btn btn-primary">Submit</button> 
+          <button class="btn btn-danger">Reset</button></div>
+      </div>
+      </div>
+      
+  </div>
+    </form>
+
+     <h2>Registered Users</h2>
+     <table class="table table-responsive">
+      <div class="row">
+          
+          <div class="col col-md-5">Firstname Lastname</div>
+          <div class="col col-md-1">Gender</div>
+          <div class="col col-md-1">Age</div>
+          <div class="col col-md-1">City</div>
+          <div class="col col-md-2">Country</div>
+          <div class="col col-md-1">Edit</div>
+          <div class="col col-md-1">Delete</div>
+      </div>
+    <div>
+    <app-userdetails *ngFor="let userInfo of allusers.slice(0,2); even as e;" 
+                     [ngClass]="e ? 'evenrow': 'oddrow'"
+                     [user]="userInfo" >
+    </app-userdetails>
+  </div>
+    <div *ngIf="moreClick" style="border-top: 0px">
+      <app-userdetails
+         *ngFor="let userInfo of allusers.slice(2,allusers.length);even as e;" 
+         [ngClass]="e ? 'evenrow': 'oddrow'"
+         [user]="userInfo" ></app-userdetails>
+    </div>
+     <div *ngIf="allusers.length > 2">
+        <button type="button"  #moreBtn (click)="onMoreClick()"> {{ moreClick ? 'Less':'More'}}</button>
+    </div>
+    </table>      
+ 
+    </div>-->
+
+
+
+  
+

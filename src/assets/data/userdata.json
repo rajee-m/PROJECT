@@ -1,0 +1,4 @@
+[
+    { "firstname": "John","lastname": "Alex", "age": 25, "gender": "Male", "city": "Reading", "country": "UK"},
+    { "firstname": "Max", "lastname": "Muller", "age": 40, "gender": "Male", "city": "Frankfurt", "country": "Germany"}
+]

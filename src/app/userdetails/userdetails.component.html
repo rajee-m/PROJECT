@@ -1,0 +1,17 @@
+    <div class="row">        
+        <div class="col col-md-5">
+            <img [src]="user.gender === 'female'? '/assets/images/femaleicon.png':'/assets/images/maleicon.png'" 
+            class="img-responsive" style="max-height: 35px; max-width: 35px;">
+            {{user.firstname}} {{user.lastname}}
+        </div>
+
+        <div class="col col-md-1">{{user.gender}}</div>
+        <div class="col col-md-1">{{user.age}}</div>
+        <div class="col col-md-1">{{user.city}}</div>
+        <div class="col col-md-2">{{user.country}}</div>
+        <div class="col col-md-1"><a class="action-btn" href="/registration/id={{user.id}}">Edit</a></div>
+        <div class="col col-md-1"><a class="action-btn" (click)="onDeleteUser(user.id)">Delete</a></div>
+    
+    </div>
+
+    
