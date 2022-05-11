@@ -31,8 +31,6 @@ export class AppComponent {
     this.allusers.push(new userDetail('first3', 'last3', 4, 'female', 'city3', 'country3', true, 2));
     this.allusers.push(new userDetail('first4', 'last4', 4, 'male', 'city4', 'country4', true, 3));
     this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'country5', true, 4));
-    
-
   }
 
   validateGender(value)
@@ -76,5 +74,5 @@ export class AppComponent {
   clearData()
   {
     this.userForm.reset();
-   }  
+  }  
 }

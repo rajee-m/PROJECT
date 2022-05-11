@@ -111,14 +111,18 @@
       <div>
       <app-userdetails *ngFor="let userInfo of allusers.slice(0,2); even as e;" 
                        [ngClass]="e ? 'evenrow': 'oddrow'"
-                       [user]="userInfo" >
+                       [user]="userInfo" 
+                       (OnUserEdited)="EditUser($event)"
+                       (OnUserDeleted)="DeleteUser($event)" >
       </app-userdetails>
     </div>
       <div *ngIf="moreClick" style="border-top: 0px">
         <app-userdetails
            *ngFor="let userInfo of allusers.slice(2,allusers.length);even as e;" 
            [ngClass]="e ? 'evenrow': 'oddrow'"
-           [user]="userInfo" ></app-userdetails>
+           [user]="userInfo" 
+           (OnUserEdited)="EditUser($event)"
+           (OnUserDeleted)="DeleteUser($event)"></app-userdetails>
       </div>
        <div *ngIf="allusers.length > 2">
           <button type="button"  #moreBtn (click)="onMoreClick()"> {{ moreClick ? 'Less':'More'}}</button>

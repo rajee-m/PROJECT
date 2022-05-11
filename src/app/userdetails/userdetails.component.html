@@ -9,8 +9,17 @@
         <div class="col col-md-1">{{user.age}}</div>
         <div class="col col-md-1">{{user.city}}</div>
         <div class="col col-md-2">{{user.country}}</div>
-        <div class="col col-md-1"><a class="action-btn" href="/registration/id={{user.id}}">Edit</a></div>
-        <div class="col col-md-1"><a class="action-btn" (click)="onDeleteUser(user.id)">Delete</a></div>
+        <div class="col col-md-1">
+            <a class="action-btn"
+             (click)="onEditUser(user.id)">Edit
+            </a>
+        </div>
+        <!--<div class="col col-md-1"><a class="action-btn" href="../registration/{{user.id}}">Edit</a></div>-->
+        <div class="col col-md-1">
+            <a class="action-btn" 
+             (click)="onDeleteUser(user.id)">Delete
+            </a>
+        </div>
     
     </div>
 

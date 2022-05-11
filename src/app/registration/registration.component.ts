@@ -1,4 +1,3 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { userDetail } from '../userDetails';
 
@@ -25,15 +24,27 @@ export class RegistrationComponent implements OnInit {
   moreClick:boolean = false;
 
   ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    /*this.userid = this.route.snapshot.params['id'];
+    console.log('query id ' + this.userid);
+    console.log(this.allusers);*/
   }
 
-  constructor()
+  constructor( private route: ActivatedRoute)
   {
-    this.allusers.push(new userDetail('first1', 'last1', 4, 'female', 'city1', 'country1', true, 0));
-    this.allusers.push(new userDetail('first2', 'last2', 4, 'male', 'city2', 'country2', true, 1));
-    this.allusers.push(new userDetail('first3', 'last3', 4, 'female', 'city3', 'country3', true, 2));
-    this.allusers.push(new userDetail('first4', 'last4', 4, 'male', 'city4', 'country4', true, 3));
-    this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'country5', true, 4));
+    /*if(this.route.snapshot.params['id'] >0)
+    {
+        this.userData.id = this.userid;
+        this.userData =  this.allusers[this.userid];
+        console.log('selected user ' +this.userData);        
+    }
+    
+    this.allusers.push(new userDetail('first1', 'last1', 4, 'female', 'city1', 'india', true, 0));
+    this.allusers.push(new userDetail('first2', 'last2', 4, 'male', 'city2', 'usa', true, 1));
+    this.allusers.push(new userDetail('first3', 'last3', 4, 'female', 'city3', 'india', true, 2));
+    this.allusers.push(new userDetail('first4', 'last4', 4, 'male', 'city4', 'usa', true, 3));
+    this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'india', true, 4));*/
   }
 
   validateGender(value)
@@ -57,16 +68,30 @@ export class RegistrationComponent implements OnInit {
   {
       if(this.userForm.valid)
       {
-          this.allusers.push(new userDetail(
-            this.userForm.form.value.firstname, 
-            this.userForm.form.value.lastname, 
-            this.userForm.form.value.age, 
-            this.userForm.form.value.gender, 
-            this.userForm.form.value.city,
-            this.userForm.form.value.country, 
-            this.userForm.form.value.agree, this.allusers.length+1));
-            this.clearData();
-            //console.log("in parent" + this.allusers.length);
+        let user:userDetail;
+        user =  new userDetail(this.userForm.form.value.firstname, 
+          this.userForm.form.value.lastname, 
+          this.userForm.form.value.age, 
+          this.userForm.form.value.gender, 
+          this.userForm.form.value.city,
+          this.userForm.form.value.country, 
+          this.userForm.form.value.agree,
+          this.userid);
+
+        if(this.editMode)
+        {
+          this.DeleteUser(this.userid);
+          console.log('edit user' + this.userid);
+          //this.allusers[this.userid] =  user; 
+        }
+        else
+        {
+          console.log('new user');
+          user.id = this.allusers.length+1;
+        }
+        this.allusers.push(user);     
+        
+        this.clearData();
       }
       else
       {

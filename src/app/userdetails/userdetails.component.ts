@@ -1,4 +1,6 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { outputAst } from '@angular/compiler';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+
 import { userDetail } from '../userDetails';
 //import { IUserData } from '../IUserData';
 import { UserserviceService } from '../userservice.service';
@@ -13,7 +15,8 @@ export class UserdetailsComponent implements OnInit {
   //public userDetails:IUserData[] = [];
   //constructor(private _userservice: UserserviceService) { }
   
-
+    @Output() OnUserDeleted = new EventEmitter<number>();
+    @Output() OnUserEdited = new EventEmitter<number>();
     @Input() user:  userDetail;
     @Input() allusers: userDetail[];
     
@@ -24,7 +27,7 @@ export class UserdetailsComponent implements OnInit {
           }
 
   ngOnInit() {
-    console.log("entered" + this.user);
+    //console.log("entered" + this.user);
     //this.allusers.push( new userDetail(this.user.firstname, this.user.lastname, 
       //this.user.age, this.user.gender, this.user.city, this.user.country, this.user.agree, this.user.id))
         //this._userservice.getUserDeta()
@@ -32,10 +35,10 @@ export class UserdetailsComponent implements OnInit {
   }
 
 
-
-  OnEditUser(id: number)
+  onEditUser(id: number)
   {
-    alert("selected id" + id);
+    console.log('Edited User Id: '+ id);
+    this.OnUserEdited.emit(id);
   }
 
   onDeleteUser(id: number)
