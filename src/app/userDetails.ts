@@ -10,5 +10,6 @@ export class userDetail{
         public agree:boolean,
         public id:number
         )
-    {  }
+    {
+      }
 }

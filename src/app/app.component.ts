@@ -2,11 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { userDetail } from './userDetails';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'PROJECT';
   @ViewChild('userForm') userForm: NgForm;
@@ -26,11 +28,11 @@ export class AppComponent {
 
   constructor()
   {
-    this.allusers.push(new userDetail('first1', 'last1', 4, 'female', 'city1', 'country1', true, 0));
+    /*this.allusers.push(new userDetail('first1', 'last1', 4, 'female', 'city1', 'country1', true, 0));
     this.allusers.push(new userDetail('first2', 'last2', 4, 'male', 'city2', 'country2', true, 1));
     this.allusers.push(new userDetail('first3', 'last3', 4, 'female', 'city3', 'country3', true, 2));
     this.allusers.push(new userDetail('first4', 'last4', 4, 'male', 'city4', 'country4', true, 3));
-    this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'country5', true, 4));
+    this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'country5', true, 4));*/
   }
 
   validateGender(value)
@@ -44,6 +46,7 @@ export class AppComponent {
       this.genderHasError = false;
     }
   }
+
   onMoreClick()
   {
     this.moreClick = !this.moreClick;

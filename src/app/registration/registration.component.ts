@@ -1,8 +1,8 @@
- import { Component, OnInit,ViewChild } from '@angular/core';
+ import { Component, OnInit,ViewChild,AfterViewInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { userDetail } from '../userDetails';
-import { ActivatedRoute } from '@angular/router';
-import { v4 as uuidv4   } from 'uuid';
+
+import { UserService } from '../userservice.service';
 
 
 @Component({
@@ -14,44 +14,40 @@ export class RegistrationComponent implements OnInit {
   title = 'PROJECT';
   @ViewChild('userForm') userForm: NgForm;
   @ViewChild('moreBtn') moreButton;
-  
+  @ViewChild('firstname') firstNameRef : ElementRef;
 
 
-  firstName:string = "";
-  lastName:string = "";
-  gender:string ="";
-  age:number = 0;
-  city:string = "";
-  country:string ="";
   allusers:userDetail[] = [];
-  agreed:boolean = false;
+  users:userDetail[] = [];
   userData = new userDetail("", "", 0, "", "", "", false,0);
   genderHasError = true;
   moreClick:boolean = false;
   userid:number = 0 ;
   editMode = false;
 
-  ngOnInit(): void 
+
+  ngOnInit() 
   {
-    /*this.userid = this.route.snapshot.params['id'];
-    console.log('query id ' + this.userid);
-    console.log(this.allusers);*/
+    this.allusers = this.userService.getUserDetails();
+    
+    this.userService.userDetailsChanged
+      .subscribe( (
+        users: userDetail[] )=>{
+          this.allusers = users;
+        }
+
+    );
+    console.log(this.allusers);
   }
 
-  constructor( private route: ActivatedRoute)
+  constructor( private userService: UserService)
   {
     /*if(this.route.snapshot.params['id'] >0)
     {
         this.userData.id = this.userid;
         this.userData =  this.allusers[this.userid];
         console.log('selected user ' +this.userData);        
-    }
-    
-    this.allusers.push(new userDetail('first1', 'last1', 4, 'female', 'city1', 'india', true, 0));
-    this.allusers.push(new userDetail('first2', 'last2', 4, 'male', 'city2', 'usa', true, 1));
-    this.allusers.push(new userDetail('first3', 'last3', 4, 'female', 'city3', 'india', true, 2));
-    this.allusers.push(new userDetail('first4', 'last4', 4, 'male', 'city4', 'usa', true, 3));
-    this.allusers.push(new userDetail('first5', 'last5', 4, 'female', 'city5', 'india', true, 4));*/
+    }*/
   }
 
   validateGender(value)
@@ -72,16 +68,14 @@ export class RegistrationComponent implements OnInit {
 
   EditUser(id: number)
   {
-   
-
     if(this.allusers != null)
     {
-      let users = this.allusers.slice();
+      
       this.userid = id;
-      this.userData =  users.find(item => item.id == id);
+      //this clones the copy of item. 
+      this.userData = JSON.parse(JSON.stringify(this.allusers.find(item => item.id === id)));
       console.log('selected user ' +this.userData);    
       this.editMode = true;    
-      
     }
   }
 
@@ -89,9 +83,10 @@ export class RegistrationComponent implements OnInit {
   {
     if(this.allusers != null)
     {
-      let index = this.allusers.findIndex( item => item.id ==  id);
+      this.userService.DeleteUser(id);
+      //let index = this.allusers.findIndex( item => item.id ===  id);
       console.log('entered delete' + id);
-      this.allusers.splice(index, 1);
+      //this.allusers.splice(index, 1);
     }
   }
 
@@ -111,7 +106,8 @@ export class RegistrationComponent implements OnInit {
 
         if(this.editMode)
         {
-          this.DeleteUser(this.userid);
+          //this.DeleteUser(this.userid);
+          this.userService.updateUserDetail(user);
           console.log('edit user' + this.userid);
           //this.allusers[this.userid] =  user; 
         }
@@ -119,9 +115,11 @@ export class RegistrationComponent implements OnInit {
         {
           console.log('new user');
           user.id = this.allusers.length+1;
+          this.userService.addUserDetail(user);
         }
-        this.allusers.push(user);     
+        //this.allusers.push(user);     
         
+        console.log(this.allusers);
         this.clearData();
       }
       else
@@ -135,5 +133,4 @@ export class RegistrationComponent implements OnInit {
     this.userForm.reset();
     this.editMode = false;
    }  
-
 }
